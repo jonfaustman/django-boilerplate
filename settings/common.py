@@ -2,12 +2,13 @@
 import conf.environment
 import os
 
+LOCAL = False
+
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 ADMINS = (
     #('', ''),
 )
-
 
 MANAGERS = ADMINS
 
@@ -62,7 +63,7 @@ TEMPLATE_LOADERS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.core.context_processors.auth",
+    "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
@@ -81,20 +82,67 @@ MIDDLEWARE_CLASSES = (
 
 #AUTH_PROFILE_MODULE = 'profile.UserProfile'
 
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(SITE_ROOT, 'templates'),
+
+    # We have added a "Master" template directory here, and below if you choose, add directories for each specific app.
+    #"./newapp/templates"
+    )
+
+ROOT_URLCONF = 'urls'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+
+    'django.contrib.admin',
+
+    #Site specific apps
+    #'apps.myapps',
+    )
 
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
+# the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'formatter': 'verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
         }
     },
     'loggers': {
@@ -102,6 +150,11 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
-        },
-    }
+            },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['sentry'],
+            'propagate': False,
+            },
+        }
 }

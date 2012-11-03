@@ -8,8 +8,6 @@ path = lambda *a: os.path.join(ROOT, *a)
 prev_sys_path = list(sys.path)
 
 site.addsitedir(path('../apps'))
-site.addsitedir(path('../lib'))
-site.addsitedir(path('../vendor'))
 
 
 # Move the new items to the front of sys.path. (via virtualenv)

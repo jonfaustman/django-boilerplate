@@ -2,6 +2,7 @@ from settings.common import *
 import os
 
 DEBUG = True
+LOCAL = True
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 
@@ -38,35 +39,9 @@ STATIC_ROOT = '' #os.path.join(SITE_ROOT, 'static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '%sgrappelli/' % STATIC_URL
-
-
-TEMPLATE_DIRS = (
-    #"/Users/Derek/Documents/code/personal/apps/fotochest/static/photo_manager/themes/default/templates"
-    os.path.join(SITE_ROOT, 'templates'),
-)
 
 
 
 
-ROOT_URLCONF = 'urls.local'
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
-    
-    'django.contrib.admin',
-    
-    #Site specific apps
-    #'apps.myapps',
-)
 
-)
