@@ -110,6 +110,10 @@ INSTALLED_APPS = (
     #'apps.myapps',
     )
 
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = []
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -135,11 +139,6 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
-            'formatter': 'verbose'
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -151,11 +150,6 @@ LOGGING = {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
-            },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['sentry'],
-            'propagate': False,
-            },
+            }
         }
 }
