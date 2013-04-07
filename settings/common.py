@@ -12,7 +12,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -88,27 +87,29 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(SITE_ROOT, 'templates'),
-
-    # We have added a "Master" template directory here, and below if you choose, add directories for each specific app.
-    #"./newapp/templates"
     )
 
 ROOT_URLCONF = 'urls'
 
-INSTALLED_APPS = (
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
     'django.contrib.admin',
+)
 
-    #Site specific apps
-    #'apps.myapps',
-    )
+THIRD_PARTY_APPS = (
+    'south',
+)
+
+LOCAL_APPS = (
+
+)
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

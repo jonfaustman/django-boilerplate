@@ -11,14 +11,12 @@ __date__ = '11/3/12'
 urlpatterns = patterns('',
     # Examples:
     url(r'^', include('apps.project.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-)
+if settings.DEBUG:
 
-
-
-urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    )
+    urlpatterns += staticfiles_urlpatterns()
