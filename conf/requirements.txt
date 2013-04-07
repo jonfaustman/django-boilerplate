@@ -1,4 +1,77 @@
-django==1.5
+# Core Apps/Libraries
+django==1.5.1
 south==0.7.6
 hadrian==1.1.5
 django-bootstrap-static==2.2.0
+python-memcached==1.48
+
+# Debugging
+django-debug-toolbar==0.9.4
+django-extensions
+Werkzeug
+
+# Development Tools
+django-dev-email==1.0.1
+
+# Mail
+django-mail-queue==1.6
+
+# Async Task Queuing
+celery==3.0.17
+django-celery==3.0.17
+django-kombu==0.9.4
+
+# Search
+django-haystack==1.2.7
+whoosh==2.4.1
+
+# Testing
+factory_boy==1.1.3
+selenium==2.29.0
+nose
+mock
+django-nose
+coverage
+pylint
+pep8
+
+# Other helpful but not always needed apps
+fabric
+sphinx
+
+# Forms
+django-chosen==0.1
+django-crispy-forms==1.2.0
+
+# Image manipulation
+pillow
+PIL
+sorl-thumbnail==11.12
+easy-thumbnails
+
+# APIs
+git+git://github.com/kstateome/Django-API-Playground.git
+django-tastypie==0.9.12
+
+# Libraries
+requests==1.1.0
+markdown
+django_compressor
+bleach
+git://github.com/mozilla/nuggets.git#egg=nuggets
+commonware
+
+# Class Extensions/Helpers
+django-infuse
+django-braces
+
+# Monitoring
+django-ping==0.2
+newrelic==1.10.0.28
+
+# Settings Control
+django-constance==0.5
+django-waffle
+
+# Comments
+django-disqus==0.4.1
