@@ -9,21 +9,14 @@ allow for maximum re-usability.
 
 * Python 2.7, PIP, and virtualenv installed.
 * Use south
-* Django 1.3.1 is the latest version of django at the current time.
+* Django 1.6 is the latest version of django at the current time.
 
-## Setup
 
-Setup a new virtualenv
+## Vagrant/Salt
 
-    virtualenv projectname --no-site-packages
-    
-Activate the virtualenv
-    
-    source project/bin/activate
-    
-Install the build requirement of fabric
+Included with the boilerplate structure is a salt/vagrant setup for easily
+creating replicated development environments.  You can modify the core salt state
+and add remove states as you see fit.  Make sure to go through  and remove the references
+to ``test``.
 
-    pip install fabric
-
-Add any vendor apps to requirements.txt.
 

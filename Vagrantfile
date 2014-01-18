@@ -1,34 +1,32 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  ## Choose your base box
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-Vagrant::Config.run do |config|
-	# Every Vagrant virtual environment requires a box to build off of.
-	config.vm.box = "precise32"
-	#config.vm.box = "lucid32"
-	
-	# The url from where the 'config.vm.box' box will be fetched if it
-	# doesn't already exist on the user's system.
-	config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-	#config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
-	
-	# Boot with a GUI so you can see the screen. (Default is headless)
-	# config.vm.boot_mode = :gui
-	
-	# Assign this VM to a host only network IP, allowing you to access it
-	# via the IP.
-	#config.vm.network :hostonly, "33.33.33.10"
-	
-	# Forward a port from the guest to the host, which allows for outside
-	# computers to access the VM, whereas host only networking does not.
-	config.vm.forward_port 8000, 9000
-	
-	# Share an additional folder to the guest VM. The first argument is
-	# an identifier, the second is the path on the guest to mount the
-	# folder, and the third is the path on the host to the actual folder.
-	config.vm.share_folder "v-data", "/vagrant_data", "./data"
-	config.vm.share_folder "project", "/home/vagrant/django_app", "./django_app"
-	config.ssh.forward_agent = true
-	
-	# Enable provisioning with a shell script.
-	config.vm.provision :shell, :path => "install.sh"
+  config.vm.synced_folder "", "/home/vagrant/test"
+
+  config.vm.network "forwarded_port", guest: 8080, host: 9090
+  config.vm.network "forwarded_port", guest: 8081, host: 9091
+  config.ssh.forward_agent = true
+
+  ## For masterless, mount your file roots file root
+  config.vm.synced_folder "salt/roots/", "/srv/"
+  config.vm.host_name = 'test-dev'
+
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--memory", "2548"]
+  end
+
+  ## Set your salt configs here
+  config.vm.provision :salt do |salt|
+
+    ## Minion config is set to ``file_client: local`` for masterless
+    salt.minion_config = "salt/minion"
+
+    ## Installs our example formula in "salt/roots/salt"
+    salt.run_highstate = true
+
+    salt.verbose = true
+
+  end
 end
