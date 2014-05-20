@@ -10,6 +10,8 @@ base:
     - memcached
     - supervisor
     - rabbitmq
-    - mysql
+    - mysql.server
+    - mysql.database
+    - mysql.python
     - django
 
